@@ -120,6 +120,10 @@ VITE_API_URL=https://your-backend-domain/api
 
 ---
 
+# Login 
+**email:** admin@gmail.com
+**password:** admin
+
 ## ✅ Checklist
 
 - Matches Figma UI (responsive + styled)
