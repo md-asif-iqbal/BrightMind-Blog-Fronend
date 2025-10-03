@@ -112,6 +112,8 @@ src/
 
 **Vercel:** Deploy easily with zero config.
 
+**LIVE** https://bright-mind-blog-fronend.vercel.app/
+
 Ensure you set the environment variable in Vercel:
 
 ```
