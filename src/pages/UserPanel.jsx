@@ -71,8 +71,8 @@ export default function UserPanel() {
         <aside className={`md:sticky md:top-0 md:h-[100dvh] bg-white border-r border-zinc-200 md:border-none ${sidebarOpen ? "block" : "hidden md:block"}`}>
           <div className="p-4">
             <Link to="/" className="flex items-center gap-2 mb-6">
-              <img src="/Union.png" alt="logo" className="h-8 w-8" />
-              <span className="font-semibold">Newsx</span>
+              <img src="/Union.png" alt="logo" className="h-8 w-20" />
+              
             </Link>
             <nav className="space-y-1">
               <NavItem icon={<Home className="h-4 w-4" />} label="Home" to="/" active={loc.pathname === "/"} />

@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar.jsx";
 import AuthProvider from './state/AuthContext.jsx';
 import { useAuth } from './state/useAuth.js';
 import RecentBlogs from "./pages/RecentBlogs.jsx";
+import Footer from "./components/Footer.jsx";
 
 const Protected = ({ adminOnly = false, children }) => {
   const { user } = useAuth();
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/admin/*" element={<Protected adminOnly><AdminPanel /></Protected>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <Footer />
     </AuthProvider>
   );
 }
