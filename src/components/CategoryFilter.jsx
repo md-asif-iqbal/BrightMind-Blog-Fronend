@@ -1,4 +1,3 @@
-// src/components/CategoryFilter.jsx
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import api from "../utils/api.js";
@@ -7,7 +6,7 @@ export default function CategoryFilter() {
   const [categories, setCategories] = useState([]);
   const [open, setOpen] = useState(false);
   const [params] = useSearchParams();
-  const activeName = (params.get("categoryName") || "").toLowerCase(); // active slug from URL
+  const activeName = (params.get("categoryName") || "").toLowerCase();
 
   useEffect(() => {
     let ok = true;
@@ -35,7 +34,6 @@ export default function CategoryFilter() {
 
       {open && (
         <div className="absolute z-10 mt-2 w-64 max-h-80 overflow-auto bg-slate-900 border border-slate-800 rounded-xl shadow-xl p-2">
-          {/* Show "All" option */}
           <Link
             to="/"
             onClick={() => setOpen(false)}
@@ -48,9 +46,8 @@ export default function CategoryFilter() {
             All
           </Link>
 
-          {/* Category list */}
           {categories.map((c) => {
-            const slug = (c.slug || c.name).toLowerCase(); // prefer slug from DB
+            const slug = (c.slug || c.name).toLowerCase();
             return (
               <Link
                 key={c._id}

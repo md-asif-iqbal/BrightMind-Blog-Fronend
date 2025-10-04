@@ -1,15 +1,9 @@
-// src/pages/HomePage.jsx  (REPLACE FILE)
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import api from "../utils/api.js";
 import PostCard from "../components/PostCard.jsx";
 import CategoryFilter from "../components/CategoryFilter.jsx";
 
-/**
- * Why: we allow category names with special chars (e.g., ".NET").
- * We pass categoryName (exact display name) to the backend.
- * Backend should filter by category name (case-insensitive) if categoryName is present.
- */
 export default function HomePage() {
   const [params] = useSearchParams();
   const navigate = useNavigate();
@@ -19,27 +13,24 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   const q = (params.get("q") || "").trim();
-  const categoryName = params.get("categoryName") || ""; // <-- use name not slug
+  const categoryName = params.get("categoryName") || "";
   const page = Number(params.get("page") || 1);
 
-  // Debounce search input -> updates URL query
   useEffect(() => {
     const t = setTimeout(() => {
       const next = new URLSearchParams(params);
       if (qInput.trim()) next.set("q", qInput.trim());
       else next.delete("q");
-      next.delete("page"); // reset page on new search
+      next.delete("page");
       navigate(`/?${next.toString()}`, { replace: true });
     }, 400);
     return () => clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [qInput]);
 
-  // Fetch posts whenever filters change
   useEffect(() => {
     const qs = new URLSearchParams();
-    if (q) qs.set("q", q); // free-text search
-    if (categoryName) qs.set("categoryName", categoryName); // exact display name (e.g., ".NET")
+    if (q) qs.set("q", q);
+    if (categoryName) qs.set("categoryName", categoryName);
     if (page > 1) qs.set("page", String(page));
 
     setLoading(true);
@@ -60,7 +51,6 @@ export default function HomePage() {
       <header className="max-w-6xl mx-auto px-4 pt-8">
         <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
           <CategoryFilter
-            // When a category is picked, write categoryName into URL
             onPick={(name) => {
               const next = new URLSearchParams(params);
               if (name) next.set("categoryName", name);

@@ -1,4 +1,3 @@
-// frontend/src/pages/UserPanel.jsx
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../state/useAuth.js";
@@ -7,7 +6,7 @@ import { Home, User2, FileText, Plus, Trash2, Menu, LogOut } from "lucide-react"
 
 export default function UserPanel() {
   const { user, logout } = useAuth();
-  const [sidebarOpen, setSidebarOpen] = useState(false); // ✅ fixed
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const nav = useNavigate();
@@ -44,7 +43,6 @@ export default function UserPanel() {
 
   return (
     <div className="min-h-screen bg-zinc-50">
-      {/* Mobile top bar */}
       <div className="md:hidden sticky top-0 z-40 bg-white border-b border-zinc-200 px-4 py-2 flex items-center justify-between">
         <button
           onClick={() => setSidebarOpen(v => !v)}
@@ -67,7 +65,6 @@ export default function UserPanel() {
       </div>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[240px_1fr] gap-0 md:gap-6">
-        {/* Sidebar */}
         <aside className={`md:sticky md:top-0 md:h-[100dvh] bg-white border-r border-zinc-200 md:border-none ${sidebarOpen ? "block" : "hidden md:block"}`}>
           <div className="p-4">
             <Link to="/" className="flex items-center gap-2 mb-6">
@@ -98,9 +95,7 @@ export default function UserPanel() {
           </div>
         </aside>
 
-        {/* Main */}
         <main className="px-4 md:px-0 py-6">
-          {/* Profile */}
           <section className="bg-white rounded-2xl border border-zinc-200 p-5 mb-6">
             <h2 className="text-lg font-semibold mb-4">My Profile</h2>
             <div className="flex items-start gap-4">

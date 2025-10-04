@@ -9,7 +9,6 @@ export default function AdminPanel() {
 
   return (
     <div className="min-h-[calc(100vh-64px)] bg-gradient-to-br from-violet-100 via-violet-200 to-violet-300">
-      {/* Top bar for mobile */}
       <div className="lg:hidden flex items-center justify-between px-4 py-3">
         <h3 className="font-semibold text-violet-800 text-base">Admin Panel</h3>
         <button
@@ -21,7 +20,6 @@ export default function AdminPanel() {
       </div>
 
       <div className="grid lg:grid-cols-[220px_1fr]">
-        {/* Sidebar */}
         <aside
           className={`border-r bg-white/80 shadow-lg rounded-tr-3xl rounded-br-3xl flex flex-col transition-all
             ${menuOpen ? 'block' : 'hidden'} lg:block`}
@@ -53,7 +51,6 @@ export default function AdminPanel() {
           </div>
         </aside>
 
-        {/* Content */}
         <section className="p-4 lg:p-8">
           <div className="bg-white/90 rounded-2xl lg:rounded-3xl shadow-xl p-4 lg:p-6 min-h-[70vh]">
             <Routes>
@@ -90,7 +87,6 @@ function PostsList() {
         </Link>
       </div>
 
-      {/* Mobile: cards */}
       <div className="sm:hidden space-y-3">
         {data.items.map((p) => (
           <div key={p._id} className="rounded-xl border shadow bg-white p-3">
@@ -118,7 +114,6 @@ function PostsList() {
         ))}
       </div>
 
-      {/* Desktop: table */}
       <div className="hidden sm:block overflow-auto rounded-xl shadow">
         <table className="min-w-[640px] w-full bg-white rounded-xl">
           <thead>
@@ -186,7 +181,6 @@ function PostEditor() {
 
   useEffect(() => {
     if (isEdit) {
-      // Prefer a dedicated endpoint for single post
       api.get(`/posts/${id}`)
         .then((r) => {
           const found = r.data;

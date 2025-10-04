@@ -1,4 +1,3 @@
-// frontend/src/pages/PostPage.jsx
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import api from '../utils/api.js';

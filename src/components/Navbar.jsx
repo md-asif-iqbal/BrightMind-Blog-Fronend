@@ -42,7 +42,7 @@ export default function Navbar() {
 
         <nav className="hidden md:flex items-center gap-6 text-sm text-gray-700">
           <Link to="/" className="hover:text-black">Home</Link>
-          <Link to="/recent" className="hover:text-black">Recent Blogs</Link> {/* NEW */}
+          <Link to="/recent" className="hover:text-black">Recent Blogs</Link>
         </nav>
 
         <div className="flex items-center gap-3">
