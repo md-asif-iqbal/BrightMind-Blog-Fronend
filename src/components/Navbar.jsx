@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../state/useAuth.js";
-import { Bell, ChevronDown } from "lucide-react";
+import { Bell, ChevronDown, Menu } from "lucide-react";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const [mobileNav, setMobileNav] = useState(false);
   const menuRef = useRef(null);
   const btnRef = useRef(null);
   const navigate = useNavigate();
@@ -21,9 +22,19 @@ export default function Navbar() {
       ) {
         setOpen(false);
       }
+      if (
+        mobileNav &&
+        !e.target.closest("#mobile-nav") &&
+        !e.target.closest("#mobile-nav-btn")
+      ) {
+        setMobileNav(false);
+      }
     }
     function onKey(e) {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        setMobileNav(false);
+      }
     }
     document.addEventListener("mousedown", onClick);
     document.addEventListener("keydown", onKey);
@@ -31,7 +42,7 @@ export default function Navbar() {
       document.removeEventListener("mousedown", onClick);
       document.removeEventListener("keydown", onKey);
     };
-  }, [open]);
+  }, [open, mobileNav]);
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-zinc-200">
@@ -40,10 +51,35 @@ export default function Navbar() {
           <img src="/Union.png" alt="Newsx logo" className="h-9 w-24" draggable={false} />
         </Link>
 
+        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6 text-sm text-gray-700">
           <Link to="/" className="hover:text-black">Home</Link>
           <Link to="/recent" className="hover:text-black">Recent Blogs</Link>
         </nav>
+
+        <button
+          id="mobile-nav-btn"
+          className="md:hidden p-2 rounded-lg border hover:bg-gray-100"
+          onClick={() => setMobileNav((v) => !v)}
+          aria-label="Open menu"
+        >
+          <Menu className="h-5 w-5" />
+        </button>
+
+        
+        {mobileNav && (
+          <div
+            id="mobile-nav"
+            className="absolute top-16 left-0 w-full bg-white border-b border-zinc-200 shadow-md flex flex-col items-center gap-2 py-4 md:hidden"
+          >
+            <Link to="/" className="py-2 px-4 w-full text-center hover:bg-zinc-100" onClick={() => setMobileNav(false)}>
+              Home
+            </Link>
+            <Link to="/recent" className="py-2 px-4 w-full text-center hover:bg-zinc-100" onClick={() => setMobileNav(false)}>
+              Recent Blogs
+            </Link>
+          </div>
+        )}
 
         <div className="flex items-center gap-3">
           <button className="p-2 rounded-lg border hover:bg-gray-100" aria-label="Notifications">
